@@ -6,7 +6,18 @@ create table students(
 	isForeigner bool
 );
 
-insert into students (name, age, gender, isForeigner) values ('Semyon', 34, 'm', false);
+insert into students (
+    name,
+    age,
+    gender,
+    isForeigner
+    )
+values (
+    'Semyon',
+    34,
+    'm',
+    false
+    );
 
 select * from students;
 
