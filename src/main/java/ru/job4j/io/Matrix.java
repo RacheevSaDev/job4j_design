@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 
 public class Matrix {
 
-    public static int[][] multiple(int size) {
+    private static int[][] multiple(int size) {
         int[][] table = new int[size][size];
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table[i].length; j++) {
@@ -14,12 +14,10 @@ public class Matrix {
         return table;
     }
 
-    public static void main(String[] args) {
-        int size = 9;
-        int[][] table = multiple(size);
+    private static void writeMatrixToFile(int[][] table) {
         try (FileOutputStream out = new FileOutputStream("resultMatrix.txt")) {
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < size; j++) {
+            for (int i = 0; i < table.length; i++) {
+                for (int j = 0; j < table[i].length; j++) {
                     out.write(Integer.toString(table[i][j]).getBytes());
                     out.write(" ".getBytes());
                 }
@@ -28,5 +26,10 @@ public class Matrix {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        int size = 9;
+        writeMatrixToFile(multiple(size));
     }
 }
