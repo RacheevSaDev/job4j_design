@@ -28,8 +28,7 @@ select
 	p.name,
 	p.price
 from product p
-order by price desc
-limit 1;
+where p.price = (select max(p.price) from product p);
 
 -- 5. Написать запрос, который выводит для каждого типа количество продуктов к нему принадлежащих. В виде имя_типа, количество
 select
