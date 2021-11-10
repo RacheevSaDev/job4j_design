@@ -68,8 +68,26 @@ join bodies b
 
 -- 2) Вывести отдельно детали (1 деталь - 1 запрос), которые не используются НИ в одной машине, кузова, двигатели, коробки передач.
 -- двигатель
-select e.name from engines e left join cars c on e.id = c.engine_id group by e.name having count(c.id) = 0;
+select
+	e.name
+from engines e
+left join cars c
+	on e.id = c.engine_id
+where c.id is null
+group by e.name;
 -- трансмиссия
-select t.name from transmissions t left join cars c on t.id = c.transmission_id group by t.name having count(c.id) = 0;
+select
+	t.name
+from transmissions t
+left join cars c
+	on t.id = c.transmission_id
+where c.id is null
+group by t.name;
 -- кузов
-select b.name from bodies b left join cars c on b.id = c.body_id group by b.name having count(c.id) = 0;
+select
+	b.name
+from bodies b
+left join cars c
+	on b.id = c.body_id
+where c.id is null
+group by b.name;
