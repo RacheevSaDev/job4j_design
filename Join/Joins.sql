@@ -29,20 +29,56 @@ insert into emploers (name, departament_id) values ('emp7', null);
 select * from emploers;
 
 -- 2. Выполнить запросы с left, right, full, cross соединениями
-select e.name, d.name from emploers e left join departaments d on e.departament_id = d.id;
+select
+    e.name,
+    d.name
+from emploers e
+left join departaments d
+    on e.departament_id = d.id;
 
-select e.name, d.name from emploers e right join departaments d on e.departament_id = d.id;
+select
+    e.name,
+    d.name
+from emploers e
+right join departaments d
+    on e.departament_id = d.id;
 
-select e.name, d.name from emploers e full join departaments d on e.departament_id = d.id;
+select
+    e.name,
+    d.name
+from emploers e
+full join departaments d
+    on e.departament_id = d.id;
 
-select e.name, d.name from emploers e cross join departaments d;
+select
+    e.name,
+    d.name
+from emploers e
+cross join departaments d;
 
 -- 3. Используя left join найти департаменты, у которых нет работников
-select d.name from departaments d left join emploers e on e.departament_id = d.id group by d.name having count(e.name) = 0;
+select
+    d.name
+from departaments d
+left join emploers e
+    on e.departament_id = d.id
+where e.name is null
+group by d.name;
 
 -- 4. Используя left и right join написать запросы, которые давали бы одинаковый результат.
-select e.name, d.name from emploers e left join departaments d on e.departament_id = d.id;
-select e.name, d.name from departaments d right join emploers e on e.departament_id = d.id;
+select
+    e.name,
+    d.name
+from emploers e
+left join departaments d
+    on e.departament_id = d.id;
+
+select
+    e.name,
+    d.name
+from departaments d
+right join emploers e
+    on e.departament_id = d.id;
 
 -- 5. Создать таблицу teens с атрибутами name, gender и заполнить ее. Используя cross join составить все возможные разнополые пары
 -- Создать таблицу
@@ -63,4 +99,9 @@ insert into teens (name, gender) values ('Dima', 'M');
 select * from teens;
 
 --составить все возможные разнополые пары
-select t.name, tt.name from teens t cross join teens tt where not t.gender = tt.gender;
+select
+    t.name,
+    tt.name
+from teens t
+cross join teens tt
+where not t.gender = tt.gender;
