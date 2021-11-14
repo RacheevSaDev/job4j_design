@@ -9,13 +9,9 @@ public class LogFilter {
     public static List<String> filter(String file) {
         List<String> filteredLines = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            List<String> lines = in.lines().collect(Collectors.toList());
-            for (String line : lines) {
-                String[] splitLine = line.split(" ");
-                if ("404".equals(splitLine[splitLine.length - 2])) {
-                    filteredLines.add(line);
-                }
-            }
+            filteredLines = in.lines()
+                    .filter(x -> x.split(" ")[x.split(" ").length - 2].equals("404"))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }
