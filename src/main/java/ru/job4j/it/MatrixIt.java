@@ -14,28 +14,20 @@ public class MatrixIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        while (row < data.length) {
-            if (data[row].length == 0) {
-                row++;
-                continue;
-            }
-            return true;
+        if (column == data[row].length) {
+            row++;
+            column = 0;
         }
-        return false;
+        while (row < data.length && data[row].length == 0) {
+            row++;
+        }
+        return row < data.length;
     }
 
     @Override
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
-        }
-        if (column == data[row].length) {
-            row++;
-            column = 0;
-            while (data[row].length == 0 && row < data.length) {
-                row++;
-                column = 0;
-            }
         }
         return data[row][column++];
     }
