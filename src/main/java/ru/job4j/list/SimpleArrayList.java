@@ -13,11 +13,9 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public void add(T value) {
-        if (size == container.length) {
-            this.container  = Arrays.copyOf(container, container.length * 2);
-        }
         this.container[size] = value;
         size++;
+        expandArray();
         modCount++;
     }
 
@@ -60,6 +58,9 @@ public class SimpleArrayList<T> implements List<T> {
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return index != size;
             }
 
@@ -68,11 +69,14 @@ public class SimpleArrayList<T> implements List<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
                 return container[index++];
             }
         };
+    }
+
+    private void expandArray() {
+        if (size == container.length) {
+            this.container  = Arrays.copyOf(container, container.length * 2);
+        }
     }
 }
