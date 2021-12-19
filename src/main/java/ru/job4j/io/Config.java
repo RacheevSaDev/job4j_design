@@ -3,32 +3,34 @@ package ru.job4j.io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringJoiner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Config {
-
+    private static final Pattern PAIR_TEMPLATE = Pattern.compile("^(.+)(=)(.*)$");
     private final String path;
-    private final Map<String, String> values = new HashMap<String, String>();
+    private final Map<String, String> values = new HashMap<>();
 
     public Config(final String path) {
         this.path = path;
     }
 
     public void load() {
-
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            List<String> linesArray = read.lines().collect(Collectors.toList());
-            for (String line : linesArray) {
+            for (String line = read.readLine(); line != null; line = read.readLine()) {
                 if (line.startsWith("#") || line.equals("")) {
                     continue;
                 }
-                if (line.matches("^(.+)(=)(.*)$")) {
-                    String[] lineParsed = line.split("=");
-                    values.put(lineParsed[0].trim(), lineParsed[1].trim());
-                } else {
-                    throw(new IllegalArgumentException());
+                Matcher m = PAIR_TEMPLATE.matcher(line);
+                if (!m.matches()) {
+                    throw(new IllegalArgumentException("Строка " + "\""
+                            + line + "\"" + " не соответствует шаблону \"<ключ> = [значение]\""));
                 }
+                String[] lineParsed = line.split("=");
+                values.put(lineParsed[0].trim(), lineParsed[1].trim());
             }
         } catch (IOException e) {
             e.printStackTrace();
