@@ -7,22 +7,21 @@ public class SimpleArrayList<T> implements List<T> {
     private int size;
     private int modCount;
 
+    @SuppressWarnings("checkstyle:LeftCurly")
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
     }
 
     @Override
     public void add(T value) {
-        this.container[size] = value;
-        size++;
         expandArray();
+        this.container[size++] = value;
         modCount++;
     }
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, container.length);
-        T prevElement = container[index];
+        T prevElement = get(index);
         container[index] = newValue;
         modCount++;
         return prevElement;
@@ -30,8 +29,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, container.length);
-        T prevElement = container[index];
+        T prevElement = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         container[size - 1] = null;
         size--;
@@ -41,7 +39,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
@@ -52,7 +50,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private int index;
             final private int expectedModCount = modCount;
 
@@ -76,7 +74,8 @@ public class SimpleArrayList<T> implements List<T> {
 
     private void expandArray() {
         if (size == container.length) {
-            this.container  = Arrays.copyOf(container, container.length * 2);
+            this.container  = Arrays.copyOf(container,
+                    container.length != 0 ? container.length * 2 : 1);
         }
     }
 }
