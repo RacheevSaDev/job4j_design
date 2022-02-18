@@ -7,7 +7,6 @@ public class SimpleArrayList<T> implements List<T> {
     private int size;
     private int modCount;
 
-    @SuppressWarnings("checkstyle:LeftCurly")
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
     }
@@ -74,8 +73,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     private void expandArray() {
         if (size == container.length) {
-            this.container  = Arrays.copyOf(container,
-                    container.length != 0 ? container.length * 2 : 1);
+            this.container = Arrays.copyOf(container, container.length  * 2 + 1);
         }
     }
 }
