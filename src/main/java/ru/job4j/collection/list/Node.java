@@ -2,7 +2,7 @@ package ru.job4j.collection.list;
 
 public class Node<V> {
     private V value;
-    private Node nextNode;
+    private Node<V> nextNode;
 
     public Node(V val) {
         this.value = val;
@@ -13,11 +13,11 @@ public class Node<V> {
         return value;
     }
 
-    public Node getNextNode() {
+    public Node<V> getNextNode() {
         return nextNode;
     }
 
-    public void setNextNode(Node nextNode) {
+    public void setNextNode(Node<V> nextNode) {
         this.nextNode = nextNode;
     }
 }
