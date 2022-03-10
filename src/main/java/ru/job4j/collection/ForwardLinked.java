@@ -27,20 +27,20 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        if (this.size == 0 || this.size == 1) {
-            return false;
-        }
-        Node<T> previous = null;
-        Node<T> pointer = head;
+        boolean res = this.size != 0 && this.size != 1;
+        if (res) {
+            Node<T> previous = null;
+            Node<T> pointer = head;
 
-        while (pointer != null) {
-            Node<T> next = pointer.next;
-            pointer.next = previous;
-            previous = pointer;
-            pointer = next;
+            while (pointer != null) {
+                Node<T> next = pointer.next;
+                pointer.next = previous;
+                previous = pointer;
+                pointer = next;
+            }
+            head = previous;
         }
-        head = previous;
-        return true;
+        return res;
     }
 
     public T deleteFirst() {
