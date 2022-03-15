@@ -19,10 +19,15 @@ public class EchoServer {
 
                         System.out.println(str);
                     }
-                    out.flush();
-                    if (strFirst.contains("/?msg=Bye")) {
+                    if (strFirst.contains("/?msg=Exit")) {
                         break;
                     }
+                    if (strFirst.contains("/?msg=Hello")) {
+                        out.write("Hello, dear friend.".getBytes());
+                    } else {
+                        out.write("What".getBytes());
+                    }
+                    out.flush();
                 }
             }
         }
