@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bank isActive="true" bic="000155" filial="3">
+    <contact phone="+88003333222" email="bank@bank.com">
+        <address>Novosibirsk, Stroiteley 11</address>
+    </contact>
+    <departaments>
+        <departament name="Central" />
+        <departament name="West" />
+        <departament name="East" />
+    </departaments>
+</bank>
