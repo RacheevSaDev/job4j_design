@@ -5,11 +5,11 @@ import com.google.gson.GsonBuilder;
 import java.util.Arrays;
 
 public class Car {
-    private boolean isRunAndDrive;
-    private int age;
-    private String model;
-    private Seller seller;
-    private String[] other;
+    private final boolean isRunAndDrive;
+    private final int age;
+    private final String model;
+    private final Seller seller;
+    private final String[] other;
 
     public Car(boolean isRunAndDrive, int age, String model, Seller seller, String[] other) {
         this.isRunAndDrive = isRunAndDrive;
@@ -27,8 +27,8 @@ public class Car {
     }
 
     private static class Seller {
-        private String name;
-        private String phone;
+        private final String name;
+        private final String phone;
 
         public Seller(String name, String phone) {
             this.name = name;
