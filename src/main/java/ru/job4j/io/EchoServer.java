@@ -16,12 +16,18 @@ public class EchoServer {
                     String strFirst = in.readLine();
                     for (String str = strFirst; str != null && !str.isEmpty();
                          str = in.readLine()) {
+
                         System.out.println(str);
                     }
-                    out.flush();
-                     if ("/?msg=Bye".equals(strFirst.split(" ")[1])) {
+                    if ("/?msg=Exit".equals(strFirst.split(" ")[1])) {
                         break;
                     }
+                    if ("/?msg=Hello".equals(strFirst.split(" ")[1])) {
+                        out.write("Hello, dear friend.".getBytes());
+                    } else {
+                        out.write("What".getBytes());
+                    }
+                    out.flush();
                 }
             }
         }
