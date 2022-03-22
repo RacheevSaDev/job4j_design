@@ -19,6 +19,7 @@ public class EchoServer {
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     String strFirst = in.readLine();
                     if ("/?msg=Exit".equals(strFirst.split(" ")[1])) {
+                        server.close();
                         break;
                     }
                     if ("/?msg=Hello".equals(strFirst.split(" ")[1])) {
