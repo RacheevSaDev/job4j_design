@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
 @XmlRootElement(name = "bank")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Bank {
     @XmlAttribute
     private boolean isActive;

@@ -1,9 +1,9 @@
 package ru.job4j.serialization.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "department")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Department {
     @XmlAttribute
     private String name;
